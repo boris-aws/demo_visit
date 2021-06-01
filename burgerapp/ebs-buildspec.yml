@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      # update libraries
+      - apt-get update
+  pre_build:
+    commands:
+      - echo Installing source npm dependencies
+      - npm install
+  build:
+    commands:
+      - echo Build phase started on `date`
+      - npm run-script build
+      - npm run test
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - "**/*"
+  name: burgerappProd
